@@ -2,7 +2,7 @@
 
 So you got an existing GWT widget and you would like to publish it to pure html/JS audience preferably as a web component. In this case you have a problem and hopefully this article will help you resolve that problem.
 
-### Extra hacks necessary to get it working. 
+### Extra hacks necessary to get it working
 * GWT 2.7.0: enable Js interop compilation by adding compilation parameter jsInteropMode=JS
 * Make GWT widgetset to be one file by using sso linker.
 
@@ -59,7 +59,7 @@ With version 2.7 this is still very much experimental so in order to enable inte
 </configuration>
 ```
 
-## One file widgetset.
+## One file widgetset
 
 It would be more preferable if the GWT compilation result would be just one .js file instead of multitude of them. This can be accomplished by using sso linker in widgetset.xml.
 
@@ -74,7 +74,6 @@ After exporting the widget it's really easy to start using it with you web compo
 ```
 Polymer({
 	ready: function() {
-		var self = this;
 	  	var button = new org.vaadin.webcomponents.WebComponentButton();
 	  	button.setText(this.buttontext);
 	  
