@@ -1,0 +1,36 @@
+<link rel="import"
+      href="polymer/polymer.html">
+      
+<script type="text/javascript" language="javascript" src="wrapperwidgetset/wrapperwidgetset.nocache.js"></script>
+ 
+<dom-module id="gwt-wrapper" attributes="buttontext">
+
+  <template>
+    <div id="wrappercontainer">
+    </div>
+  </template>
+ 
+  <script>
+  
+ 	Polymer({
+ 		properties: {
+ 			buttontext: {type: String}
+ 		},
+ 	
+		ready: function() {
+			var self = this;
+		  	var button = new org.vaadin.webcomponents.WebComponentButton();
+		  	button.setText(this.buttontext);
+		  
+		    button.addClickListener(function() {
+		    	alert("clicked button with text: "+self.buttontext);
+		  	});
+		    
+		  	this.$.wrappercontainer.id = org.vaadin.util.JSUtils.getId();
+		  	org.vaadin.util.JSUtils.addButton(button, this.$.wrappercontainer.id);
+		}
+	});
+
+  </script>
+
+</dom-module>
