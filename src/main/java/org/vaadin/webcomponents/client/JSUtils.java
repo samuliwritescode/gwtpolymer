@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class JSUtils {
 
     @JsExport
-    public static void addButton(Widget w, String jsid) {
+    public static void addWidget(Widget w, String jsid) {
         RootPanel.get(jsid).add(w);
     }
 

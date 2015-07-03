@@ -87,3 +87,8 @@ Polymer({
 	}
 });
 ```
+
+## Conclusions
+After setting the few quirks it's really easy to combine web components and GWT widgets. Granted the interop API is not production ready with GWT 2.7 yet but upcoming GWT 3.0 looks really promising. Hopefully this example can get you started publishing your existing widgets into web components world or is a good heads up what it requires to do so.
+
+For the sake of simplicity this example is focusing on pure GWT not Vaadin but if your Vaadin client side widgets are implemented so that they are GWT widgets and not too dependent on their connectors or server side stuff, this approach is applicable to Vaadin client side widgets too.
