@@ -12,26 +12,26 @@ Traditional GWT application is a monolithic chunk of javascript binary that does
 
 By annotating classes and types that are supposed to be exposed to javascript the black box of GWT is bleached.
  
-'''
+```
 @JsNamespace("$wnd.org.vaadin.webcomponents")
 @JsExport
 @JsType
 public class WebComponentButton extends Button {
 ...
 }
-'''
+```
 
 With version 2.7 this is still very much experimental so in order to enable interop the GWT compiler must be invoked with special compilation parameter called jsInteropMode that must be set to value "JS". With maven you would configure it like this in plugin section:
 
-'''
+```
 <configuration>
   <jsInteropMode>JS</jsInteropMode>
 </configuration>
-'''
+```
 
 ## Access from JavaScript
 
-'''
+```
 var button = new org.vaadin.webcomponents.WebComponentButton();
 button.setText(this.buttontext);
-'''
+```
