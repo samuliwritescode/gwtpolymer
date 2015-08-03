@@ -8,6 +8,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 
+//Annotations necessary to export object API for plain JS.
 @JsNamespace("$wnd.org.vaadin.webcomponents")
 @JsExport
 @JsType

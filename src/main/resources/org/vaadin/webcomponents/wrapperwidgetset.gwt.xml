@@ -5,6 +5,9 @@
   <entry-point class='org.vaadin.webcomponents.client.DemoEntryPoint' />
   <source path='client' />
 
+<!--
+	Here's the interesting part. Make compilation result to be single file. 
+ -->
   <collapse-all-properties />
   <add-linker name="sso" />
 </module>

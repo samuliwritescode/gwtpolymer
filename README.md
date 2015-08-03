@@ -1,13 +1,13 @@
 # Use GWT widget as Polymer web component
 
-So you got an existing GWT widget and you would like to publish it to pure html/JS audience preferably as a web component. In this case you have a problem and hopefully this article will help you resolve that problem.
+So you got an existing GWT widget and you would like to publish it to pure html/JS audience preferably as a web component. In this case you have a problem but hopefully this article will help you resolve that problem.
 
 ### Extra hacks necessary to get it working
-* GWT 2.7.0: enable Js interop compilation by adding compilation parameter jsInteropMode=JS
-* Make GWT widgetset to be one file by using sso linker.
+* GWT 2.7.0: enable Js interop compilation by adding the compilation parameter jsInteropMode=JS
+* Make GWT widgetset compilation result to be one file by using the sso linker.
 
 ## GWT Js interop API
-Traditional GWT application is a monolithic chunk of javascript binary that does it magic hidden from plain old JavaScript / html. Luckily as of version 2.7 of GWT the project has released API for next generation GWT/JS interop. https://docs.google.com/document/d/1tir74SB-ZWrs-gQ8w-lOEV3oMY6u6lF2MmNivDEihZ4/edit
+Traditional GWT application is a monolithic chunk of javascript binary that does it magic hidden from plain old JavaScript / html. Luckily as of version 2.7 of GWT the project has released API for next generation GWT/JS interop. See https://docs.google.com/document/d/1tir74SB-ZWrs-gQ8w-lOEV3oMY6u6lF2MmNivDEihZ4/edit
 
 By annotating classes and types that are supposed to be exposed to javascript the black box of GWT is bleached a bit. Basically you have to annotate everything that is going to be published to javascript in this manner:
  
@@ -22,14 +22,14 @@ public class WebComponentButton extends Button {
 
 Note that these annotations are not transitive so you will not expose any of the methods defined in super classes or interfaces. If you refer another class then that must be exported too. With more complex widgets it is probably easier to write a wrapper class that operates the actual widget than it is to fully export the widget API and it's dependencies.
 
-Please also note the namespace string is starting with $wnd. Without it the exported class is not visible for some reason. It is probably a bug in GWT 2.7. After exporting you can access an object inside the GWT binary in javascript by:
+Please also note the namespace string is starting with $wnd. Without it the exported class is not visible for some reason. It is probably a bug in GWT 2.7. After exporting you can access an object inside the GWT binary in javascript in this manner:
 
 ```
 var button = new org.vaadin.webcomponents.WebComponentButton();
 button.setText("hello world");
 ```
 
-Another detail to consider is that widget must be added to a root panel or child of another widget or else it is going to be detached. For this an util method that does this is necessary.
+Another detail to consider is that widget must be added to a root panel or child of another widget or else it is going to be detached and GWT events will not work. For this an util method that does this is necessary.
 
 ```
 @JsExport
@@ -47,7 +47,7 @@ public static String getId() {
 }
 ```
 
-See fully working example of utils in JSUtils.java found in example project.
+See fully working example of utils in JSUtils.java found in example project. https://github.com/capeisti/gwtpolymer
 
 ## Special compilation parameter
 
@@ -91,3 +91,5 @@ Polymer({
 After setting the few quirks it's really easy to combine web components and GWT widgets. Granted the interop API is not production ready with GWT 2.7 yet but upcoming GWT 3.0 looks really promising. Hopefully this example can get you started publishing your existing widgets into web components world or is a good heads up what it requires to do so.
 
 For the sake of simplicity this example is focusing on pure GWT not Vaadin but if your Vaadin client side widgets are implemented so that they are GWT widgets and not too dependent on their connectors or server side stuff, this approach is applicable to Vaadin client side widgets too.
+
+See sample project here https://github.com/capeisti/gwtpolymer

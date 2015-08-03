@@ -1,3 +1,6 @@
+<!--
+	Polymer definition for a GWT web component.
+ -->
 <link rel="import"
       href="polymer/polymer.html">
       
@@ -6,6 +9,9 @@
 <dom-module id="gwt-wrapper" attributes="buttontext">
 
   <template>
+  <!--
+    Component will be populated here based on id.
+   -->
     <div id="wrappercontainer">
     </div>
   </template>
@@ -19,14 +25,20 @@
  	
 		ready: function() {
 			var self = this;
+            // Create exposed GWT object as JS object.
 		  	var button = new org.vaadin.webcomponents.WebComponentButton();
+
+            //And use it's annotation exported API.
 		  	button.setText(this.buttontext);
-		  
+
 		    button.addClickListener(function() {
 		    	alert("clicked button with text: "+self.buttontext);
 		  	});
-		    
+
+            //Here's a little glue to attach the object into HTML DOM. First make the containing id really unique
 		  	this.$.wrappercontainer.id = org.vaadin.util.JSUtils.getId();
+
+            //and then let util class attach the widget into it.
 		  	org.vaadin.util.JSUtils.addWidget(button, this.$.wrappercontainer.id);
 		}
 	});
